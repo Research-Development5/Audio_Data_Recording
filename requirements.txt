@@ -4,4 +4,4 @@ oauth2client
 streamlit_option_menu
 gspread_dataframe
 sounddevice
-pyaudio --user
+pyaudio
