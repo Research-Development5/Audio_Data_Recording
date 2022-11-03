@@ -5,3 +5,4 @@ streamlit_option_menu
 gspread_dataframe
 sounddevice
 wavio
+google-api-python-client
