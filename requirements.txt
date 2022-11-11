@@ -6,3 +6,4 @@ gspread_dataframe
 sounddevice
 wavio
 google-api-python-client
+streamlit-audiorecorder
