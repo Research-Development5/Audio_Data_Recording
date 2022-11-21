@@ -80,7 +80,7 @@ if choose=='Record voice':
                 latest_file = max(list_of_files, key=os.path.getctime)
                 file_name=str(int(latest_file.split('/')[1].split('.wav')[0])+1)
             except:
-                file_name='0'
+                file_name='1'
             path_myrecording = f"./recorded_voices/"+file_name+".wav"
             wav_file = open(path_myrecording, "wb")
             wav_file.write(audio1.tobytes())
