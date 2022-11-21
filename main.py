@@ -78,10 +78,12 @@ if choose=='Record voice':
             try:
                 list_of_files = glob.glob('recorded_voices/*.wav') # * means all if need specific format then *.csv
                 latest_file = max(list_of_files, key=os.path.getctime)
-                file_name=str(int(latest_file.split('/')[1].split('.wav')[0])+1)
+                file_name=str(int(latest_file.split('/')[1].split('_')[2].split('.')[0])+1)
+                #file_name=str(int(latest_file.split('/')[1].split('.wav')[0])+1)
             except:
                 file_name='1'
-            path_myrecording = f"./recorded_voices/"+file_name+".wav"
+            #path_myrecording = f"./recorded_voices/"+file_name+".wav"
+            path_myrecording = f"./recorded_voices/user_1_"+file_name+".wav"
             wav_file = open(path_myrecording, "wb")
             wav_file.write(audio1.tobytes())
             #save_record(path_myrecording, st.session_state["rec"], 48000)
