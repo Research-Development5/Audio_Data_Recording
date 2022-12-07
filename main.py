@@ -29,9 +29,15 @@ def local_css(file_name):
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 local_css('style.css')
 st.image(image='HeaderBanner.jpg')
+credentials = ServiceAccountCredentials.from_json_keyfile_name("voices-367409-3c9e0403a16a.json", scope)
+client = gspread.authorize(credentials)
+sheet = client.open("recorded voices").get_worksheet(1)
+#sheet = client.open("recorded voices").sheet1
+existing=gd.get_as_dataframe(sheet)
+x=len(existing)
 
 def functionality():
-    card(title=df[0], text=' ', image="https://images.pexels.com/photos/2341290/pexels-photo-2341290.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
+    card(title=df[x], text=' ', image="https://images.pexels.com/photos/2341290/pexels-photo-2341290.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
 
 with st.sidebar:
     choose = option_menu(" ", ["Record voice","Data recorded / Upload"],
