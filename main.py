@@ -31,10 +31,10 @@ local_css('style.css')
 st.image(image='HeaderBanner.jpg')
 credentials = ServiceAccountCredentials.from_json_keyfile_name("voices-367409-3c9e0403a16a.json", scope)
 client = gspread.authorize(credentials)
-sheet = client.open("recorded voices").get_worksheet(1)
+sheet = client.open("recorded voices").get_worksheet(0)
 #sheet = client.open("recorded voices").sheet1
 existing=gd.get_as_dataframe(sheet)
-x=len(existing)
+x=len(existing)+1
 
 def functionality():
     card(title=df[x], text=' ', image="https://images.pexels.com/photos/2341290/pexels-photo-2341290.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
@@ -87,7 +87,7 @@ if choose=='Record voice':
                 file_name=str(int(latest_file.split('/')[1].split('_')[2].split('.')[0])+1)
                 #file_name=str(int(latest_file.split('/')[1].split('.wav')[0])+1)
             except:
-                file_name='1'
+                file_name=str(x)
             #path_myrecording = f"./recorded_voices/"+file_name+".wav"
             path_myrecording = f"./recorded_voices/user_4_"+file_name+".wav"
             wav_file = open(path_myrecording, "wb")
@@ -106,7 +106,7 @@ if choose=='Data recorded / Upload':
     #credentials = ServiceAccountCredentials.from_json_keyfile_name("words-correction-a710f731b5e8.json", scope)
     credentials = ServiceAccountCredentials.from_json_keyfile_name("voices-367409-3c9e0403a16a.json", scope)
     client = gspread.authorize(credentials)
-    sheet = client.open("recorded voices").sheet1
+    sheet = client.open("recorded voices").get_worksheet(1)
     final= pd.read_csv('final.csv')
     st.write(final)
     upload= st.button('Upload File')
