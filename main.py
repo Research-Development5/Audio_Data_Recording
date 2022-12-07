@@ -93,7 +93,7 @@ if choose=='Record voice':
             except:
                 credentials = ServiceAccountCredentials.from_json_keyfile_name("voices-367409-3c9e0403a16a.json", scope)
                 client = gspread.authorize(credentials)
-                sheet = client.open("recorded voices").get_worksheet(1)
+                sheet = client.open("recorded voices").get_worksheet(2)
                 existing=gd.get_as_dataframe(sheet)
                 x=len(existing)
                 file_name=str(x+1)
