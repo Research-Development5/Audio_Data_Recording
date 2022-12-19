@@ -97,7 +97,7 @@ if choose=='Record voice':
                 existing=gd.get_as_dataframe(sheet)
                 x=len(existing)
                 file_name=str(x+1)
-            path_myrecording = f"./recorded_voices/user_2_"+file_name+".wav"
+            path_myrecording = f"./recorded_voices/user_4_"+file_name+".wav"
             wav_file = open(path_myrecording, "wb")
             wav_file.write(audio1.tobytes())
             #save_record(path_myrecording, st.session_state["rec"], 48000)
