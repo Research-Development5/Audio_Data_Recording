@@ -1,3 +1,5 @@
+
+
 import streamlit as st
 import pandas as pd
 from streamlit_card import card
@@ -31,12 +33,18 @@ local_css('style.css')
 st.image(image='HeaderBanner.jpg')
 credentials = ServiceAccountCredentials.from_json_keyfile_name("voices-367409-3c9e0403a16a.json", scope)
 client = gspread.authorize(credentials)
-sheet = client.open("recorded voices").get_worksheet(2)
+sheet = client.open("recorded voices").get_worksheet(3)
 #sheet = client.open("recorded voices").sheet1
 existing=gd.get_as_dataframe(sheet)
 x=len(existing)
 
 def functionality():
+    credentials = ServiceAccountCredentials.from_json_keyfile_name("voices-367409-3c9e0403a16a.json", scope)
+    client = gspread.authorize(credentials)
+    sheet = client.open("recorded voices").get_worksheet(0)
+    #sheet = client.open("recorded voices").sheet1
+    existing=gd.get_as_dataframe(sheet)
+    x=len(existing)
     card(title=df[x], text=' ', image="https://images.pexels.com/photos/2341290/pexels-photo-2341290.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
 
 
@@ -93,11 +101,11 @@ if choose=='Record voice':
             except:
                 credentials = ServiceAccountCredentials.from_json_keyfile_name("voices-367409-3c9e0403a16a.json", scope)
                 client = gspread.authorize(credentials)
-                sheet = client.open("recorded voices").get_worksheet(2)
+                sheet = client.open("recorded voices").get_worksheet(0)
                 existing=gd.get_as_dataframe(sheet)
                 x=len(existing)
                 file_name=str(x+1)
-            path_myrecording = f"./recorded_voices/user_4_"+file_name+".wav"
+            path_myrecording = f"./recorded_voices/user_1_"+file_name+".wav"
             wav_file = open(path_myrecording, "wb")
             wav_file.write(audio1.tobytes())
             #save_record(path_myrecording, st.session_state["rec"], 48000)
@@ -107,7 +115,7 @@ if choose=='Record voice':
             final.to_csv('final.csv',index=False)
             st.write('File Saved')
             st.session_state["counter"] = 0
-            st.session_state["rec"]=None
+            #st.session_state["rec"]=None
             df.to_csv('voices_unavailable.csv',index=False)
             st.experimental_rerun()
 if choose=='Data recorded / Upload':
@@ -115,7 +123,7 @@ if choose=='Data recorded / Upload':
     #credentials = ServiceAccountCredentials.from_json_keyfile_name("words-correction-a710f731b5e8.json", scope)
     credentials = ServiceAccountCredentials.from_json_keyfile_name("voices-367409-3c9e0403a16a.json", scope)
     client = gspread.authorize(credentials)
-    sheet = client.open("recorded voices").get_worksheet(2)
+    sheet = client.open("recorded voices").get_worksheet(0)
     final= pd.read_csv('final.csv')
     st.write(final)
     upload= st.button('Upload File')
