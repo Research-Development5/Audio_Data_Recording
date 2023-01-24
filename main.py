@@ -41,7 +41,7 @@ x=len(existing)
 def functionality():
     credentials = ServiceAccountCredentials.from_json_keyfile_name("voices-367409-3c9e0403a16a.json", scope)
     client = gspread.authorize(credentials)
-    sheet = client.open("recorded voices").get_worksheet(0)
+    sheet = client.open("recorded voices").get_worksheet(3)
     #sheet = client.open("recorded voices").sheet1
     existing=gd.get_as_dataframe(sheet)
     x=len(existing)
@@ -101,11 +101,11 @@ if choose=='Record voice':
             except:
                 credentials = ServiceAccountCredentials.from_json_keyfile_name("voices-367409-3c9e0403a16a.json", scope)
                 client = gspread.authorize(credentials)
-                sheet = client.open("recorded voices").get_worksheet(0)
+                sheet = client.open("recorded voices").get_worksheet(3)
                 existing=gd.get_as_dataframe(sheet)
                 x=len(existing)
                 file_name=str(x+1)
-            path_myrecording = f"./recorded_voices/user_1_"+file_name+".wav"
+            path_myrecording = f"./recorded_voices/user_4_"+file_name+".wav"
             wav_file = open(path_myrecording, "wb")
             wav_file.write(audio1.tobytes())
             #save_record(path_myrecording, st.session_state["rec"], 48000)
@@ -123,7 +123,7 @@ if choose=='Data recorded / Upload':
     #credentials = ServiceAccountCredentials.from_json_keyfile_name("words-correction-a710f731b5e8.json", scope)
     credentials = ServiceAccountCredentials.from_json_keyfile_name("voices-367409-3c9e0403a16a.json", scope)
     client = gspread.authorize(credentials)
-    sheet = client.open("recorded voices").get_worksheet(0)
+    sheet = client.open("recorded voices").get_worksheet(3)
     final= pd.read_csv('final.csv')
     st.write(final)
     upload= st.button('Upload File')
