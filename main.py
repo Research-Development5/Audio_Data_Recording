@@ -88,6 +88,12 @@ if choose=='Record voice':
         if st.session_state["counter"] ==0:
             st.warning('voice not recorded yet first record it please')
         else:
+            credentials = ServiceAccountCredentials.from_json_keyfile_name("voices-367409-3c9e0403a16a.json", scope)
+            client = gspread.authorize(credentials)
+            sheet = client.open("recorded voices").get_worksheet(2)
+         #sheet = client.open("recorded voices").sheet1
+            existing=gd.get_as_dataframe(sheet)
+            x=len(existing)
             df=pd.read_csv('voices_unavailable.csv')
             word=df['word'][x]
             df=df.drop(df.loc[df['word']==word].index.values)
