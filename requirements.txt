@@ -8,3 +8,4 @@ sounddevice
 wavio
 google-api-python-client
 streamlit-audiorecorder
+pandas==1.3.5
