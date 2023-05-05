@@ -136,8 +136,8 @@ if choose=='Data recorded / Upload':
     if upload:
         for i in final['voice']:
             upload_file(i)
-        existing=gd.get_as_dataframe(sheet)
-        updated= existing.append(final)
+        existing1=gd.get_as_dataframe(sheet)
+        updated= existing1.append(final)
         gd.set_with_dataframe(sheet,updated)
         final.drop(final.index, inplace=True)
         final.to_csv('final.csv',index=False)
