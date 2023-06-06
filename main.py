@@ -117,7 +117,8 @@ if choose=='Record voice':
             #save_record(path_myrecording, st.session_state["rec"], 48000)
             os.remove('./temp/sample.wav')
             print
-            final=final.append({'word':word,'voice':path_myrecording},ignore_index=True)
+            final = pd.concat([final, pd.DataFrame([{'word':word,'voice':path_myrecording}])], ignore_index=True)
+            #final=final.append({'word':word,'voice':path_myrecording},ignore_index=True)
             final.to_csv('final.csv',index=False)
             st.write('File Saved')
             st.session_state["counter"] = 0
@@ -137,7 +138,8 @@ if choose=='Data recorded / Upload':
         for i in final['voice']:
             upload_file(i)
         existing1=gd.get_as_dataframe(sheet)
-        updated= existing1.append(final)
+        updated=pd.concat([existing1, final])
+        #updated= existing1.append(final)
         gd.set_with_dataframe(sheet,updated)
         final.drop(final.index, inplace=True)
         final.to_csv('final.csv',index=False)
