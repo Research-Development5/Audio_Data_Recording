@@ -1,4 +1,5 @@
 streamlit==1.0
+click<8.0,>=7.0
 streamlit_card
 gspread
 oauth2client
