@@ -87,7 +87,7 @@ if choose=='Record voice':
             audio1.export(audio_bytes, format="wav")
 
 # Display the audio in your Streamlit app
-            st.audio(audio_bytes)
+            #st.audio(audio_bytes)
 
 # Optionally, you can save the bytes to a file if needed
             with open("./temp/sample.wav", "wb") as wav_file:
