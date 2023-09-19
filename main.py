@@ -11,7 +11,8 @@ import os
 from record import record,save_record,read_audio
 import numpy as np
 import glob
-
+from pydub import AudioSegment
+import tempfile
 
 import numpy as np
 import streamlit as st
@@ -70,7 +71,14 @@ if choose=='Record voice':
         submitted = st.form_submit_button("آواز سنیے۔")
         if submitted:
          if len(audio1) > 0:
-            st.audio(audio1)
+            temp_audio_file = tempfile.NamedTemporaryFile(suffix=".wav", delete=False)
+            audio1.export(temp_audio_file.name, format="wav")
+# Display the audio in your Streamlit app
+            st.audio(temp_audio_file.name)
+
+# Close and delete the temporary audio file when done
+            temp_audio_file.close()
+            #st.audio(audio1)
             st.write("آواز دوبارہ ریکارڈ کرنے کے لیے' ریکارڈ کیجیے' کا بٹن دبائیں۔")
             wav_file = open("./temp/sample.wav", "wb")
             wav_file.write(audio1.tobytes())
